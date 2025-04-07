@@ -231,11 +231,19 @@
       const image = document.getElementById('griffon-image');
       switch(type) {
         case 'alcool':
-          image.src = 'assets/images/pet-griffon-malade.png'; break;
-        case 'feculents':
-          image.src = 'assets/images/pet-griffon-dodu.png'; break;
-        case 'proteines':
-          image.src = 'assets/images/pet-griffon-muscle.png'; break;
+          image.src = 'assets/images/pet-griffon-malade.png';
+  let validInput = false;
+  while (!validInput) {
+    const nbVerres = prompt("Combien de verres as-tu bu ? 🍷", "1");
+    const verres = parseInt(nbVerres);
+    if (!isNaN(verres) && verres >= 0) {
+      addXP(-verres * 30);
+      validInput = true;
+    } else {
+      const retry = confirm("Tu as entré une valeur invalide. Veux-tu réessayer ?");
+      if (!retry) validInput = true;
+    }
+  }break;
         default:
           image.src = 'assets/images/pet-bebe-griphon.png';
       }
