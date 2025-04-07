@@ -131,7 +131,12 @@
           <label class="green"><input type="checkbox" data-type="legume"> Légume</label>
           <label class="red"><input type="checkbox" data-type="proteine"> Protéine</label>
           <label class="blue"><input type="checkbox"> Lait écrémé</label>
-          <label class="grey"><input type="checkbox" data-type="ecart"> J'ai fait un écart</label>
+          <br><select class="ecart-select" style="margin-top: 0.5rem;">
+  <option value="">Choisis un type d'écart</option>
+  <option value="alcool">Alcool</option>
+  <option value="sucre">Produit sucré</option>
+  <option value="sale">Produit salé</option>
+</select>
         </div>
       </div>
     </div>
@@ -145,7 +150,12 @@
           <label class="green"><input type="checkbox" data-type="legume"> Légume</label>
           <label class="green"><input type="checkbox" data-type="fruit"> Fruit</label>
           <label class="orange"><input type="checkbox" data-type="matieregrasse"> Huile végétale</label>
-          <label class="grey"><input type="checkbox" data-type="ecart"> J'ai fait un écart</label>
+          <br><select class="ecart-select" style="margin-top: 0.5rem;">
+  <option value="">Choisis un type d'écart</option>
+  <option value="alcool">Alcool</option>
+  <option value="sucre">Produit sucré</option>
+  <option value="sale">Produit salé</option>
+</select>
         </div>
       </div>
     </div>
@@ -159,7 +169,12 @@
           <label class="green"><input type="checkbox" data-type="legume"> Légume</label>
           <label class="green"><input type="checkbox" data-type="fruit"> Fruit</label>
           <label class="orange"><input type="checkbox" data-type="matieregrasse"> Huile végétale</label>
-          <label class="grey"><input type="checkbox" data-type="ecart"> J'ai fait un écart</label>
+          <br><select class="ecart-select" style="margin-top: 0.5rem;">
+  <option value="">Choisis un type d'écart</option>
+  <option value="alcool">Alcool</option>
+  <option value="sucre">Produit sucré</option>
+  <option value="sale">Produit salé</option>
+</select>
         </div>
       </div>
     </div>
@@ -170,7 +185,12 @@
         <div class="checkbox-group">
           <label class="yellow"><input type="checkbox" data-type="feculent"> Céréales (60g)</label>
           <label class="red"><input type="checkbox" data-type="proteine"> Protéines</label>
-          <label class="grey"><input type="checkbox" data-type="ecart"> J'ai fait un écart</label>
+          <br><select class="ecart-select" style="margin-top: 0.5rem;">
+  <option value="">Choisis un type d'écart</option>
+  <option value="alcool">Alcool</option>
+  <option value="sucre">Produit sucré</option>
+  <option value="sale">Produit salé</option>
+</select>
         </div>
       </div>
     </div>
@@ -191,6 +211,19 @@
     function addXP(amount) {
       xp += amount;
       updateXPBar();
+
+    document.querySelectorAll('.ecart-select').forEach(select => {
+      select.addEventListener('change', function () {
+        const image = document.getElementById('griffon-image');
+        if (this.value === 'alcool') {
+          image.src = 'assets/images/pet-griffon-malade.png';
+        } else if (this.value === 'sucre' || this.value === 'sale') {
+          image.src = 'assets/images/pet-griffon-dodu.png';
+        } else {
+          image.src = 'assets/images/pet-bebe-griphon.png';
+        }
+      });
+    });
       if (amount < 0) {
         const bar = document.getElementById('xp-bar');
         bar.classList.add('shake');
