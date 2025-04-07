@@ -81,7 +81,7 @@
 </head>
 <body>
   <h1>💖 Ton Tamagrotchi Nutrition Magique 💖</h1>
-  <img src="assets/images/pet-bebe-griphon.png" alt="Ton pet tout mignon" class="griffon">
+  <img id="griffon-image" src="assets/images/pet-bebe-griphon.png" alt="Ton pet tout mignon" class="griffon">
 
   <div class="tabs">
     <button class="tab-button" onclick="showTab('petitdej')">🥐 Petit Déjeuner</button>
@@ -99,7 +99,13 @@
         <label class="red"><input type="checkbox"> Protéine en poudre</label>
         <label class="blue"><input type="checkbox"> Lait écrémé</label>
       </div>
-      <label><input type="checkbox" onclick="toggleEcart(this, 'ecart-petitdej')"> J'ai fait un écart 🍫</label>
+      <label><input type="checkbox" onclick="toggleEcart(this, 'ecart-petitdej', 'select-petitdej')"> J'ai fait un écart 🍫</label>
+      <select id="select-petitdej" style="display:none;" onchange="changerGriffon(this.value)">
+        <option value="">Choisis ton type d'écart</option>
+        <option value="alcool">Alcool</option>
+        <option value="feculents">Double portion de féculents</option>
+        <option value="proteines">Double portion de protéines</option>
+      </select>
       <textarea id="ecart-petitdej" style="display:none;" placeholder="Dis-moi tout bestie 💕"></textarea>
     </div>
   </div>
@@ -113,7 +119,13 @@
         <label class="green"><input type="checkbox"> Légumes</label>
         <label class="orange"><input type="checkbox"> Huile végétale</label>
       </div>
-      <label><input type="checkbox" onclick="toggleEcart(this, 'ecart-dejeuner')"> J'ai fait un écart 🍟</label>
+      <label><input type="checkbox" onclick="toggleEcart(this, 'ecart-dejeuner', 'select-dejeuner')"> J'ai fait un écart 🍟</label>
+      <select id="select-dejeuner" style="display:none;" onchange="changerGriffon(this.value)">
+        <option value="">Choisis ton type d'écart</option>
+        <option value="alcool">Alcool</option>
+        <option value="feculents">Double portion de féculents</option>
+        <option value="proteines">Double portion de protéines</option>
+      </select>
       <textarea id="ecart-dejeuner" style="display:none;" placeholder="Confesse-toi à ton pet 🐾"></textarea>
     </div>
   </div>
@@ -127,7 +139,13 @@
         <label class="green"><input type="checkbox"> Légumes</label>
         <label class="orange"><input type="checkbox"> Huile végétale</label>
       </div>
-      <label><input type="checkbox" onclick="toggleEcart(this, 'ecart-diner')"> J'ai fait un écart 🍰</label>
+      <label><input type="checkbox" onclick="toggleEcart(this, 'ecart-diner', 'select-diner')"> J'ai fait un écart 🍰</label>
+      <select id="select-diner" style="display:none;" onchange="changerGriffon(this.value)">
+        <option value="">Choisis ton type d'écart</option>
+        <option value="alcool">Alcool</option>
+        <option value="feculents">Double portion de féculents</option>
+        <option value="proteines">Double portion de protéines</option>
+      </select>
       <textarea id="ecart-diner" style="display:none;" placeholder="Tu peux tout me dire 💌"></textarea>
     </div>
   </div>
@@ -139,7 +157,13 @@
         <label class="yellow"><input type="checkbox"> Céréales (60g)</label>
         <label class="red"><input type="checkbox"> Protéines (optionnel)</label>
       </div>
-      <label><input type="checkbox" onclick="toggleEcart(this, 'ecart-collation')"> J'ai fait un écart 🍦</label>
+      <label><input type="checkbox" onclick="toggleEcart(this, 'ecart-collation', 'select-collation')"> J'ai fait un écart 🍦</label>
+      <select id="select-collation" style="display:none;" onchange="changerGriffon(this.value)">
+        <option value="">Choisis ton type d'écart</option>
+        <option value="alcool">Alcool</option>
+        <option value="feculents">Double portion de féculents</option>
+        <option value="proteines">Double portion de protéines</option>
+      </select>
       <textarea id="ecart-collation" style="display:none;" placeholder="Ton pet ne juge pas 💖"></textarea>
     </div>
   </div>
@@ -150,9 +174,29 @@
       document.getElementById(id).classList.add('active');
     }
 
-    function toggleEcart(checkbox, id) {
-      const textarea = document.getElementById(id);
-      textarea.style.display = checkbox.checked ? 'block' : 'none';
+    function toggleEcart(checkbox, textareaId, selectId) {
+      const textarea = document.getElementById(textareaId);
+      const select = document.getElementById(selectId);
+      const show = checkbox.checked;
+      textarea.style.display = show ? 'block' : 'none';
+      select.style.display = show ? 'block' : 'none';
+    }
+
+    function changerGriffon(type) {
+      const image = document.getElementById('griffon-image');
+      switch(type) {
+        case 'alcool':
+          image.src = 'assets/images/pet-griffon-malade.png';
+          break;
+        case 'feculents':
+          image.src = 'assets/images/pet-griffon-dodu.png';
+          break;
+        case 'proteines':
+          image.src = 'assets/images/pet-griffon-muscle.png';
+          break;
+        default:
+          image.src = 'assets/images/pet-bebe-griphon.png';
+      }
     }
   </script>
 </body>
