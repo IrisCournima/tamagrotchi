@@ -81,6 +81,7 @@
     .red { background-color: #f8a9a9; }
     .blue { background-color: #d0e6ff; }
     .orange { background-color: #ffd59e; }
+    .grey { background-color: #d3d3d3; }
     textarea {
       width: 90%;
       height: 100px;
@@ -130,6 +131,7 @@
           <label class="green"><input type="checkbox" data-type="legume"> Légume</label>
           <label class="red"><input type="checkbox" data-type="proteine"> Protéine</label>
           <label class="blue"><input type="checkbox"> Lait écrémé</label>
+          <label class="grey"><input type="checkbox" data-type="ecart"> J'ai fait un écart</label>
         </div>
       </div>
     </div>
@@ -143,6 +145,7 @@
           <label class="green"><input type="checkbox" data-type="legume"> Légume</label>
           <label class="green"><input type="checkbox" data-type="fruit"> Fruit</label>
           <label class="orange"><input type="checkbox" data-type="matieregrasse"> Huile végétale</label>
+          <label class="grey"><input type="checkbox" data-type="ecart"> J'ai fait un écart</label>
         </div>
       </div>
     </div>
@@ -156,6 +159,7 @@
           <label class="green"><input type="checkbox" data-type="legume"> Légume</label>
           <label class="green"><input type="checkbox" data-type="fruit"> Fruit</label>
           <label class="orange"><input type="checkbox" data-type="matieregrasse"> Huile végétale</label>
+          <label class="grey"><input type="checkbox" data-type="ecart"> J'ai fait un écart</label>
         </div>
       </div>
     </div>
@@ -166,6 +170,7 @@
         <div class="checkbox-group">
           <label class="yellow"><input type="checkbox" data-type="feculent"> Céréales (60g)</label>
           <label class="red"><input type="checkbox" data-type="proteine"> Protéines</label>
+          <label class="grey"><input type="checkbox" data-type="ecart"> J'ai fait un écart</label>
         </div>
       </div>
     </div>
@@ -198,48 +203,14 @@
       document.getElementById(id).classList.add('active');
     }
 
-    function toggleEcart(checkbox, textareaId, selectId) {
-      const textarea = document.getElementById(textareaId);
-      const select = document.getElementById(selectId);
-      const show = checkbox.checked;
-      textarea.style.display = show ? 'block' : 'none';
-      select.style.display = show ? 'block' : 'none';
-    }
-
-    function changerGriffon(type) {
-      const image = document.getElementById('griffon-image');
-      switch(type) {
-        case 'alcool':
-          image.src = 'assets/images/pet-griffon-malade.png';
-          let validInput = false;
-          while (!validInput) {
-            const nbVerres = prompt("Combien de verres as-tu bu ? 🍷", "1");
-            const verres = parseInt(nbVerres);
-            if (!isNaN(verres) && verres >= 0) {
-              addXP(-verres * 30);
-              validInput = true;
-            } else {
-              const retry = confirm("Tu as entré une valeur invalide. Veux-tu réessayer ?");
-              if (!retry) validInput = true;
-            }
-          }
-          break;
-        case 'feculents':
-          image.src = 'assets/images/pet-griffon-dodu.png';
-          break;
-        case 'proteines':
-          image.src = 'assets/images/pet-griffon-muscle.png';
-          break;
-        default:
-          image.src = 'assets/images/pet-bebe-griphon.png';
-      }
-    }
-
     document.querySelectorAll('input[type="checkbox"]').forEach(checkbox => {
       checkbox.addEventListener('change', function () {
         if (this.checked) {
           const type = this.getAttribute('data-type');
-          if (type) {
+          if (type === 'ecart') {
+            const confirmation = confirm("Tu as fait un écart ? 😱 Tu perds 30 XP 💔");
+            if (confirmation) addXP(-30);
+          } else if (type) {
             if (limits[type] !== undefined) {
               if (counters[type] < limits[type]) {
                 counters[type]++;
