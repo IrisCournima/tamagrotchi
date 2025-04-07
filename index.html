@@ -10,10 +10,8 @@
       font-family: 'Comic Sans MS', cursive;
       color: #4c2c72;
       padding: 2rem;
-      display: flex;
     }
     .main-content {
-      flex: 1;
       text-align: center;
     }
     .xp-bar {
@@ -22,7 +20,7 @@
       border: 3px solid #4c2c72;
       border-radius: 30px;
       background-color: #ddd;
-      margin-right: 2rem;
+      margin: 2rem auto;
       position: relative;
       overflow: hidden;
     }
@@ -42,23 +40,121 @@
       max-width: 200px;
       margin-bottom: 1rem;
     }
+    .section {
+      background-color: #fff;
+      border: 2px dashed #c972e6;
+      border-radius: 1rem;
+      padding: 1rem;
+      margin: 1rem auto;
+      max-width: 800px;
+    }
+    .checkbox-group label {
+      display: block;
+      margin: 0.5rem 0;
+      font-weight: bold;
+    }
     button {
-      margin-top: 1rem;
-      background-color: #ff88dc;
+      margin: 0.5rem;
+      padding: 0.5rem 1rem;
+      background-color: #c972e6;
       color: white;
       border: none;
-      border-radius: 1rem;
-      padding: 0.5rem 1rem;
-      font-size: 1rem;
+      border-radius: 10px;
       cursor: pointer;
     }
   </style>
 </head>
 <body>
-  <div class="xp-bar" id="xp-bar">
-    <div id="xp-fill" class="xp-fill"></div>
-  </div>
   <div class="main-content">
+    <div class="xp-bar" id="xp-bar">
+      <div id="xp-fill" class="xp-fill"></div>
+    </div>
     <div class="xp-label"><span id="xp-count">0</span> XP</div>
     <h1>💖 Ton Griffon de Régénération 💖</h1>
-    <img id="griffon-image" src="" alt="Ton Griffon"
+    <img id="griffon-image" src="" alt="Ton Griffon" class="griffon" />
+
+    <div class="section">
+      <h2>🍽️ Repas du jour</h2>
+      <div class="checkbox-group">
+        <label><input type="checkbox" data-xp="30"> Féculents</label>
+        <label><input type="checkbox" data-xp="30"> Fruits</label>
+        <label><input type="checkbox" data-xp="30"> Légumes</label>
+        <label><input type="checkbox" data-xp="30"> Protéines</label>
+        <label><input type="checkbox" data-xp="30"> Produit laitier</label>
+      </div>
+    </div>
+
+    <div class="section">
+      <h2>✨ Activités</h2>
+      <div class="checkbox-group">
+        <label><input type="checkbox" data-xp="50"> 30 min d’activité physique</label>
+        <label><input type="checkbox" data-xp="20"> Marche Traque</label>
+        <label><input type="checkbox" data-xp="20"> Bilan journalier</label>
+      </div>
+    </div>
+
+    <div class="section">
+      <h2>⚠️ Écarts</h2>
+      <div class="checkbox-group">
+        <label><input type="checkbox" data-xp="-30"> Alcool</label>
+        <label><input type="checkbox" data-xp="-30"> Produit sucré</label>
+        <label><input type="checkbox" data-xp="-30"> Produit salé</label>
+      </div>
+    </div>
+
+    <button onclick="resetDay()">🔄 Réinitialiser la journée</button>
+  </div>
+
+  <script>
+    const xpKey = "druidesse_xp_total";
+    let xp = parseInt(localStorage.getItem(xpKey)) || 0;
+
+    function updateXPBar() {
+      const xpMax = 65000;
+      const percent = Math.min((xp / xpMax) * 100, 100);
+      document.getElementById("xp-fill").style.height = percent + "%";
+      document.getElementById("xp-count").textContent = xp;
+      updateGriffonImage();
+    }
+
+    function updateGriffonImage() {
+      const img = document.getElementById("griffon-image");
+      if (xp >= 50000) {
+        img.src = "assets/images/pet-griffon-magique.png";
+      } else if (xp >= 20000) {
+        img.src = "assets/images/pet-griffon-adulte.png";
+      } else if (xp >= 5000) {
+        img.src = "assets/images/pet-griffon-ado.png";
+      } else {
+        img.src = "assets/images/pet-bebe-griphon.png";
+      }
+    }
+
+    function gainXP(amount) {
+      xp += amount;
+      xp = Math.max(0, xp);
+      localStorage.setItem(xpKey, xp);
+      updateXPBar();
+    }
+
+    function resetDay() {
+      if (confirm("Réinitialiser les cases cochées pour la journée ?")) {
+        document.querySelectorAll('input[type="checkbox"]').forEach(cb => cb.checked = false);
+      }
+    }
+
+    document.querySelectorAll('input[type="checkbox"]').forEach(checkbox => {
+      checkbox.addEventListener('change', function () {
+        const amount = parseInt(this.getAttribute('data-xp'));
+        if (this.checked) {
+          gainXP(amount);
+        } else {
+          gainXP(-amount);
+        }
+      });
+    });
+
+    updateXPBar();
+  </script>
+</body>
+</html>
