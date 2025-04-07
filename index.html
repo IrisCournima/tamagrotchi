@@ -98,6 +98,11 @@
     .xp-bar.shake {
       animation: shake 0.5s;
     }
+    .ecart-select {
+        display: none;
+        margin-top: 1rem;
+    }
+
     @keyframes shake {
       0% { transform: translateY(0); }
       25% { transform: translateY(-5px); }
@@ -270,6 +275,19 @@
         }
       });
     });
+
+    document.querySelectorAll('.toggle-ecart').forEach(checkbox => {
+        checkbox.addEventListener('change', function () {
+            const select = this.closest('.ecart-wrapper').querySelector('.ecart-select');
+            if (this.checked) {
+                select.style.display = 'block';
+            } else {
+                select.style.display = 'none';
+                select.value = ""; // Réinitialiser le choix si on décoche
+            }
+        });
+    });
+
 
     updateXPBar();
   </script>
