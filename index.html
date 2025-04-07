@@ -11,6 +11,10 @@
       font-family: 'Comic Sans MS', cursive;
       color: #4c2c72;
       padding: 2rem;
+      display: flex;
+    }
+    .main-content {
+      flex: 1;
       text-align: center;
     }
     .xp-bar {
@@ -19,7 +23,7 @@
       border: 3px solid #4c2c72;
       border-radius: 30px;
       background-color: #ddd;
-      margin: 1rem auto;
+      margin-right: 2rem;
       position: relative;
       overflow: hidden;
     }
@@ -90,24 +94,172 @@
       max-width: 200px;
       margin-bottom: 1rem;
     }
-    .xp-bar.shake {
-      animation: shake 0.5s;
-    }
-    @keyframes shake {
-      0% { transform: translateY(0); }
-      25% { transform: translateY(-5px); }
-      50% { transform: translateY(5px); }
-      75% { transform: translateY(-5px); }
-      100% { transform: translateY(0); }
-    }
   </style>
 </head>
 <body>
-  <img id="griffon-image" src="assets/images/pet-bebe-griphon.png" alt="Ton pet tout mignon" class="griffon">
-  <h1>💖 Ton Tamagrotchi Nutrition Magique 💖</h1>
-  <div class="xp-bar" id="xp-bar">
-    <div id="xp-fill" class="xp-fill"></div>
+  <div>
+    <div class="xp-bar">
+      <div id="xp-fill" class="xp-fill"></div>
+    </div>
+    <div class="xp-label"><span id="xp-count">4350</span> / 65000 XP</div>
   </div>
-  <div class="xp-label"><span id="xp-count">4350</span> / 65000 XP</div>
+
+  <div class="main-content">
+    <h1>💖 Ton Tamagrotchi Nutrition Magique 💖</h1>
+    <img id="griffon-image" src="assets/images/pet-bebe-griphon.png" alt="Ton pet tout mignon" class="griffon">
+
+    <div class="tabs">
+      <button class="tab-button" onclick="showTab('petitdej')">🥐 Petit Déjeuner</button>
+      <button class="tab-button" onclick="showTab('dejeuner')">🍱 Déjeuner</button>
+      <button class="tab-button" onclick="showTab('diner')">🌙 Dîner</button>
+      <button class="tab-button" onclick="showTab('collation')">🍪 Collation</button>
+    </div>
+
+    <div id="petitdej" class="tab-content active">
+      <div class="section">
+        <h2>🥐 Petit Déjeuner</h2>
+        <div class="checkbox-group">
+          <label class="yellow"><input type="checkbox" data-type="feculent"> Féculents (60g)</label>
+          <label class="green"><input type="checkbox" data-type="fruit"> Fruit</label>
+          <label class="green"><input type="checkbox" data-type="legume"> Légume</label>
+          <label class="red"><input type="checkbox" data-type="proteine"> Protéine</label>
+          <label class="blue"><input type="checkbox"> Lait écrémé</label>
+        </div>
+        <label><input type="checkbox" onclick="toggleEcart(this, 'ecart-petitdej', 'select-petitdej')"> J'ai fait un écart 🍫</label>
+        <select id="select-petitdej" style="display:none;" onchange="changerGriffon(this.value)">
+          <option value="">Choisis ton type d'écart</option>
+          <option value="alcool">Alcool</option>
+          <option value="feculents">Double portion de féculents</option>
+          <option value="proteines">Double portion de protéines</option>
+        </select>
+        <textarea id="ecart-petitdej" style="display:none;" placeholder="Dis-moi tout bestie 💕"></textarea>
+      </div>
+    </div>
+
+    <div id="dejeuner" class="tab-content">
+      <div class="section">
+        <h2>🍱 Déjeuner</h2>
+        <div class="checkbox-group">
+          <label class="yellow"><input type="checkbox" data-type="feculent"> Féculents</label>
+          <label class="red"><input type="checkbox" data-type="proteine"> Protéines</label>
+          <label class="green"><input type="checkbox" data-type="legume"> Légume</label>
+          <label class="green"><input type="checkbox" data-type="fruit"> Fruit</label>
+          <label class="orange"><input type="checkbox" data-type="matieregrasse"> Huile végétale</label>
+        </div>
+        <label><input type="checkbox" onclick="toggleEcart(this, 'ecart-dejeuner', 'select-dejeuner')"> J'ai fait un écart 🍟</label>
+        <select id="select-dejeuner" style="display:none;" onchange="changerGriffon(this.value)">
+          <option value="">Choisis ton type d'écart</option>
+          <option value="alcool">Alcool</option>
+          <option value="feculents">Double portion de féculents</option>
+          <option value="proteines">Double portion de protéines</option>
+        </select>
+        <textarea id="ecart-dejeuner" style="display:none;" placeholder="Confesse-toi à ton pet 🐾"></textarea>
+      </div>
+    </div>
+
+    <div id="diner" class="tab-content">
+      <div class="section">
+        <h2>🌙 Dîner</h2>
+        <div class="checkbox-group">
+          <label class="yellow"><input type="checkbox" data-type="feculent"> Féculents</label>
+          <label class="red"><input type="checkbox" data-type="proteine"> Protéines</label>
+          <label class="green"><input type="checkbox" data-type="legume"> Légume</label>
+          <label class="green"><input type="checkbox" data-type="fruit"> Fruit</label>
+          <label class="orange"><input type="checkbox" data-type="matieregrasse"> Huile végétale</label>
+        </div>
+        <label><input type="checkbox" onclick="toggleEcart(this, 'ecart-diner', 'select-diner')"> J'ai fait un écart 🍰</label>
+        <select id="select-diner" style="display:none;" onchange="changerGriffon(this.value)">
+          <option value="">Choisis ton type d'écart</option>
+          <option value="alcool">Alcool</option>
+          <option value="feculents">Double portion de féculents</option>
+          <option value="proteines">Double portion de protéines</option>
+        </select>
+        <textarea id="ecart-diner" style="display:none;" placeholder="Tu peux tout me dire 💌"></textarea>
+      </div>
+    </div>
+
+    <div id="collation" class="tab-content">
+      <div class="section">
+        <h2>🍪 Collation du soir</h2>
+        <div class="checkbox-group">
+          <label class="yellow"><input type="checkbox" data-type="feculent"> Céréales (60g)</label>
+          <label class="red"><input type="checkbox" data-type="proteine"> Protéines</label>
+        </div>
+        <label><input type="checkbox" onclick="toggleEcart(this, 'ecart-collation', 'select-collation')"> J'ai fait un écart 🍦</label>
+        <select id="select-collation" style="display:none;" onchange="changerGriffon(this.value)">
+          <option value="">Choisis ton type d'écart</option>
+          <option value="alcool">Alcool</option>
+          <option value="feculents">Double portion de féculents</option>
+          <option value="proteines">Double portion de protéines</option>
+        </select>
+        <textarea id="ecart-collation" style="display:none;" placeholder="Ton pet ne juge pas 💖"></textarea>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    let xp = 4350;
+    const xpMax = 65000;
+    const limits = { proteine: 5, feculent: 3, fruit: 2 };
+    const counters = { proteine: 0, feculent: 0, fruit: 0 };
+
+    function updateXPBar() {
+      const percent = Math.min((xp / xpMax) * 100, 100);
+      document.getElementById('xp-fill').style.height = percent + '%';
+      document.getElementById('xp-count').textContent = xp;
+    }
+
+    function addXP(amount) {
+      xp += amount;
+      updateXPBar();
+    }
+
+    function showTab(id) {
+      document.querySelectorAll('.tab-content').forEach(tab => tab.classList.remove('active'));
+      document.getElementById(id).classList.add('active');
+    }
+
+    function toggleEcart(checkbox, textareaId, selectId) {
+      const textarea = document.getElementById(textareaId);
+      const select = document.getElementById(selectId);
+      const show = checkbox.checked;
+      textarea.style.display = show ? 'block' : 'none';
+      select.style.display = show ? 'block' : 'none';
+    }
+
+    function changerGriffon(type) {
+      const image = document.getElementById('griffon-image');
+      switch(type) {
+        case 'alcool':
+          image.src = 'assets/images/pet-griffon-malade.png'; break;
+        case 'feculents':
+          image.src = 'assets/images/pet-griffon-dodu.png'; break;
+        case 'proteines':
+          image.src = 'assets/images/pet-griffon-muscle.png'; break;
+        default:
+          image.src = 'assets/images/pet-bebe-griphon.png';
+      }
+    }
+
+    document.querySelectorAll('input[type="checkbox"]').forEach(checkbox => {
+      checkbox.addEventListener('change', function () {
+        if (this.checked) {
+          const type = this.getAttribute('data-type');
+          if (type) {
+            if (limits[type] !== undefined) {
+              if (counters[type] < limits[type]) {
+                counters[type]++;
+                addXP(30);
+              }
+            } else {
+              addXP(30);
+            }
+          }
+        }
+      });
+    });
+
+    updateXPBar();
+  </script>
 </body>
 </html>
