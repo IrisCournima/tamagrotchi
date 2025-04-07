@@ -1,18 +1,64 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Tamagrotchi 🐾✨</title>
-  <link rel="stylesheet" href="assets/css/style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Regeneration Druidesse 🐉✨</title>
+  <style>
+    body {
+      background-color: #fef6ff;
+      font-family: 'Comic Sans MS', cursive;
+      color: #4c2c72;
+      padding: 2rem;
+      display: flex;
+    }
+    .main-content {
+      flex: 1;
+      text-align: center;
+    }
+    .xp-bar {
+      width: 60px;
+      height: 400px;
+      border: 3px solid #4c2c72;
+      border-radius: 30px;
+      background-color: #ddd;
+      margin-right: 2rem;
+      position: relative;
+      overflow: hidden;
+    }
+    .xp-fill {
+      position: absolute;
+      bottom: 0;
+      width: 100%;
+      background: linear-gradient(to top, #c972e6, #fff);
+      transition: height 0.5s;
+    }
+    .xp-label {
+      text-align: center;
+      font-weight: bold;
+      margin-top: 1rem;
+    }
+    .griffon {
+      max-width: 200px;
+      margin-bottom: 1rem;
+    }
+    button {
+      margin-top: 1rem;
+      background-color: #ff88dc;
+      color: white;
+      border: none;
+      border-radius: 1rem;
+      padding: 0.5rem 1rem;
+      font-size: 1rem;
+      cursor: pointer;
+    }
+  </style>
 </head>
 <body>
-  <div class="xp-bar" id="xp-bar"><div id="xp-fill" class="xp-fill"></div></div>
-  <div class="main-content">
-    <div class="xp-label"><span id="xp-count">4350</span> / 65000 XP</div>
-    <h1>💖 Ton Tamagrotchi Nutrition Magique 💖</h1>
-    <img id="griffon-image" src="assets/images/pet-bebe-griphon.png" alt="Ton pet tout mignon" class="griffon">
+  <div class="xp-bar" id="xp-bar">
+    <div id="xp-fill" class="xp-fill"></div>
   </div>
-  <script src="assets/js/script.js"></script>
-</body>
-</html>
+  <div class="main-content">
+    <div class="xp-label"><span id="xp-count">0</span> XP</div>
+    <h1>💖 Ton Griffon de Régénération 💖</h1>
+    <img id="griffon-image" src="" alt="Ton Griffon"
