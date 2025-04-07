@@ -126,6 +126,7 @@
       <button class="tab-button" onclick="showTab('dejeuner')">🍱 Déjeuner</button>
       <button class="tab-button" onclick="showTab('diner')">🌙 Dîner</button>
       <button class="tab-button" onclick="showTab('collation')">🍪 Collation</button>
+      <button class="tab-button" onclick="showTab('autre')">✨ Autre</button>
 
     </div>
 
@@ -215,6 +216,65 @@
       </div>
     </div>
   </div>
+  <div id="autre" class="tab-content">
+  <div class="section">
+    <h2>✨ Autres Actions ✨</h2>
+    <div class="checkbox-group">
+      <label class="green">
+        <input type="checkbox" data-xp="220"> Marche en visio ou immersion (20 min) +220 XP
+      </label>
+      <label class="yellow">
+        <input type="checkbox" data-xp="10" class="etage-checkbox"> Prendre les marches (10 XP par étage)
+        <input type="number" min="1" placeholder="Nombre d'étages" class="etage-count" style="margin-top: 0.5rem; width: 50%; display: none;">
+      </label>
+      <label class="blue">
+        <input type="checkbox" data-xp="200"> 7 jours de suivi sportif consécutifs +200 XP
+      </label>
+      <label class="blue">
+        <input type="checkbox" data-xp="200"> Grille alimentaire respectée toute la semaine +200 XP
+      </label>
+      <label class="red">
+        <input type="checkbox" data-xp="50"> Soutien apporté à un héros +50 XP
+      </label>
+      <label class="grey">
+        <input type="checkbox" data-xp="50"> Reprise après un écart sans culpabilité +50 XP
+      </label>
+      <label class="orange">
+        <input type="checkbox" data-xp="100"> Perte (toutes les 3 semaines) +100 XP
+      </label>
+    </div>
+    <div id="autre" class="tab-content">
+      <div class="section">
+        <h2>✨ Autres Actions ✨</h2>
+        <div class="checkbox-group">
+          <label class="green">
+            <input type="checkbox" data-xp="220"> Marche en visio ou immersion (20 min) +220 XP
+          </label>
+          <label class="yellow">
+            <input type="checkbox" data-xp="10" class="etage-checkbox"> Prendre les marches (10 XP par étage)
+            <input type="number" min="1" placeholder="Nombre d'étages" class="etage-count" style="margin-top: 0.5rem; width: 50%; display: none;">
+          </label>
+          <label class="blue">
+            <input type="checkbox" data-xp="200"> 7 jours de suivi sportif consécutifs +200 XP
+          </label>
+          <label class="blue">
+            <input type="checkbox" data-xp="200"> Grille alimentaire respectée toute la semaine +200 XP
+          </label>
+          <label class="red">
+            <input type="checkbox" data-xp="50"> Soutien apporté à un héros +50 XP
+          </label>
+          <label class="grey">
+            <input type="checkbox" data-xp="50"> Reprise après un écart sans culpabilité +50 XP
+          </label>
+          <label class="orange">
+            <input type="checkbox" data-xp="100"> Perte (toutes les 3 semaines) +100 XP
+          </label>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+</div>
 
   <script>
     let xp = 4350;
@@ -287,7 +347,31 @@
             }
         });
     });
+    document.querySelectorAll('.checkbox-group input[type="checkbox"]').forEach(checkbox => {
+  checkbox.addEventListener('change', function () {
+    const xpValue = parseInt(this.getAttribute('data-xp')) || 0;
 
+    // Si c'est la case pour les marches avec étages
+    if (this.classList.contains('etage-checkbox')) {
+      const input = this.closest('label').querySelector('.etage-count');
+      input.style.display = this.checked ? 'inline-block' : 'none';
+      
+      if (this.checked) {
+        input.addEventListener('input', function () {
+          const etages = parseInt(this.value) || 0;
+          addXP(etages * 10);
+        });
+      } else {
+        input.value = "";
+      }
+      return;
+    }
+
+    if (this.checked) {
+      addXP(xpValue);
+    }
+    });
+  });
 
     updateXPBar();
   </script>
