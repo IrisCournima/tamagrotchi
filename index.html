@@ -126,7 +126,7 @@
       <div class="section">
         <h2>🥐 Petit Déjeuner</h2>
         <div class="checkbox-group">
-          <label class="yellow"><input type="checkbox" data-type="feculent"> Féculents (60gcru/150gr cuit)</label>
+          <label class="yellow"><input type="checkbox" data-type="feculent"> Féculents (60g)</label>
           <label class="green"><input type="checkbox" data-type="fruit"> Fruit</label>
           <label class="green"><input type="checkbox" data-type="legume"> Légume</label>
           <label class="red"><input type="checkbox" data-type="proteine"> Protéine</label>
@@ -217,12 +217,17 @@
         const image = document.getElementById('griffon-image');
         if (this.value === 'alcool') {
           image.src = 'assets/images/pet-griffon-malade.png';
+          addXP(-30);
         } else if (this.value === 'sucre' || this.value === 'sale') {
           image.src = 'assets/images/pet-griffon-dodu.png';
+          addXP(-30);
         } else {
           image.src = 'assets/images/pet-bebe-griphon.png';
         }
       });
+    });
+
+    
     });
       if (amount < 0) {
         const bar = document.getElementById('xp-bar');
