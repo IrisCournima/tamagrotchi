@@ -23,6 +23,7 @@
       border-radius: 30px;
       background-color: #ddd;
       margin-right: 2rem;
+      margin-top: 5rem;
       position: relative;
       overflow: hidden;
     }
@@ -82,32 +83,20 @@
     .blue { background-color: #d0e6ff; }
     .orange { background-color: #ffd59e; }
     .grey { background-color: #d3d3d3; }
+    textarea {
+      width: 90%;
+      height: 100px;
+      margin-top: 1rem;
+      border-radius: 1rem;
+      padding: 1rem;
+      font-family: inherit;
+    }
     .griffon {
       max-width: 200px;
       margin-bottom: 1rem;
     }
     .xp-bar.shake {
       animation: shake 0.5s;
-    }
-    .ecart-wrapper {
-      margin-top: 1rem;
-    }
-    .ecart-select {
-      display: none;
-      margin-top: 0.5rem;
-    }
-    .ecart-display {
-      margin-top: 0.5rem;
-      font-style: italic;
-    }
-    .cancel-btn {
-      background-color: #e76f51;
-      color: white;
-      border: none;
-      border-radius: 5px;
-      padding: 0.3rem 0.6rem;
-      margin-left: 1rem;
-      cursor: pointer;
     }
     @keyframes shake {
       0% { transform: translateY(0); }
@@ -119,24 +108,103 @@
   </style>
 </head>
 <body>
+  <div class="xp-bar" id="xp-bar">
+    <div id="xp-fill" class="xp-fill"></div>
+  </div>
   <div class="main-content">
-    <div class="section">
-      <h2>🥐 Petit Déjeuner</h2>
-      <div class="checkbox-group">
-        <label class="yellow"><input type="checkbox" data-type="feculent"> Féculents</label>
-        <label class="green"><input type="checkbox" data-type="fruit"> Fruit</label>
-        <label class="green"><input type="checkbox" data-type="legume"> Légume</label>
-        <label class="red"><input type="checkbox" data-type="proteine"> Protéine</label>
-        <label class="blue"><input type="checkbox"> Lait écrémé</label>
-        <div class="ecart-wrapper">
-          <label class="grey"><input type="checkbox" class="toggle-ecart"> J'ai fait un écart</label>
-          <select class="ecart-select">
-            <option value="">Choisis un type d'écart</option>
-            <option value="alcool">Alcool</option>
-            <option value="sucre">Produit sucré</option>
-            <option value="sale">Produit salé</option>
-          </select>
-          <div class="ecart-display" style="display:none;"></div>
+    <div class="xp-label"><span id="xp-count">4350</span> / 65000 XP</div>
+    <h1>💖 Ton Tamagrotchi Nutrition Magique 💖</h1>
+    <img id="griffon-image" src="assets/images/pet-bebe-griphon.png" alt="Ton pet tout mignon" class="griffon">
+
+    <div class="tabs">
+      <button class="tab-button" onclick="showTab('petitdej')">🥐 Petit Déjeuner</button>
+      <button class="tab-button" onclick="showTab('dejeuner')">🍱 Déjeuner</button>
+      <button class="tab-button" onclick="showTab('diner')">🌙 Dîner</button>
+      <button class="tab-button" onclick="showTab('collation')">🍪 Collation</button>
+    </div>
+
+    <div id="petitdej" class="tab-content active">
+      <div class="section">
+        <h2>🥐 Petit Déjeuner</h2>
+        <div class="checkbox-group">
+          <label class="yellow"><input type="checkbox" data-type="feculent"> Féculents (60gcru/150gr cuit)</label>
+          <label class="green"><input type="checkbox" data-type="fruit"> Fruit</label>
+          <label class="green"><input type="checkbox" data-type="legume"> Légume</label>
+          <label class="red"><input type="checkbox" data-type="proteine"> Protéine</label>
+          <label class="blue"><input type="checkbox"> Lait écrémé</label>
+          <div class="ecart-wrapper">
+            <label class="grey"><input type="checkbox" class="toggle-ecart" data-type="ecart"> J'ai fait un écart</label>
+            <select class="ecart-select">
+              <option value="">Choisis un type d'écart</option>
+              <option value="alcool">Alcool</option>
+              <option value="sucre">Produit sucré</option>
+              <option value="sale">Produit salé</option>
+            </select>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div id="dejeuner" class="tab-content active">
+      <div class="section">
+        <h2>Déjeuner</h2>
+        <div class="checkbox-group">
+          <label class="yellow"><input type="checkbox" data-type="feculent"> Féculents (60gcru/150gr cuit)</label>
+          <label class="green"><input type="checkbox" data-type="fruit"> Fruit</label>
+          <label class="green"><input type="checkbox" data-type="legume"> Légume</label>
+          <label class="red"><input type="checkbox" data-type="proteine"> Protéine</label>
+          <label class="blue"><input type="checkbox"> Lait écrémé</label>
+          <div class="ecart-wrapper">
+            <label class="grey"><input type="checkbox" class="toggle-ecart" data-type="ecart"> J'ai fait un écart</label>
+            <select class="ecart-select">
+              <option value="">Choisis un type d'écart</option>
+              <option value="alcool">Alcool</option>
+              <option value="sucre">Produit sucré</option>
+              <option value="sale">Produit salé</option>
+            </select>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div id="diner" class="tab-content active">
+      <div class="section">
+        <h2>Diner</h2>
+        <div class="checkbox-group">
+          <label class="yellow"><input type="checkbox" data-type="feculent"> Féculents (60gcru/150gr cuit)</label>
+          <label class="green"><input type="checkbox" data-type="fruit"> Fruit</label>
+          <label class="green"><input type="checkbox" data-type="legume"> Légume</label>
+          <label class="red"><input type="checkbox" data-type="proteine"> Protéine</label>
+          <label class="blue"><input type="checkbox"> Lait écrémé</label>
+          <div class="ecart-wrapper">
+            <label class="grey"><input type="checkbox" class="toggle-ecart" data-type="ecart"> J'ai fait un écart</label>
+            <select class="ecart-select">
+              <option value="">Choisis un type d'écart</option>
+              <option value="alcool">Alcool</option>
+              <option value="sucre">Produit sucré</option>
+              <option value="sale">Produit salé</option>
+            </select>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div id="collation" class="tab-content active">
+      <div class="section">
+        <h2>Collation</h2>
+        <div class="checkbox-group">
+          <label class="yellow"><input type="checkbox" data-type="feculent"> Féculents (60gcru/150gr cuit)</label>
+          <label class="green"><input type="checkbox" data-type="fruit"> Fruit</label>
+          <label class="red"><input type="checkbox" data-type="proteine"> Protéine</label>
+          <label class="blue"><input type="checkbox"> Lait écrémé</label>
+          <div class="ecart-wrapper">
+            <label class="grey"><input type="checkbox" class="toggle-ecart" data-type="ecart"> J'ai fait un écart</label>
+            <select class="ecart-select">
+              <option value="">Choisis un type d'écart</option>
+              <option value="alcool">Alcool</option>
+              <option value="sucre">Produit sucré</option>
+              <option value="sale">Produit salé</option>
+            </select>
+          </div>
         </div>
       </div>
     </div>
@@ -145,6 +213,8 @@
   <script>
     let xp = 4350;
     const xpMax = 65000;
+    const limits = { proteine: 5, feculent: 3, fruit: 2 };
+    const counters = { proteine: 0, feculent: 0, fruit: 0 };
 
     function updateXPBar() {
       const percent = Math.min((xp / xpMax) * 100, 100);
@@ -155,39 +225,50 @@
     function addXP(amount) {
       xp += amount;
       updateXPBar();
+      if (amount < 0) {
+        const bar = document.getElementById('xp-bar');
+        bar.classList.add('shake');
+        setTimeout(() => bar.classList.remove('shake'), 500);
+      }
     }
 
-    document.querySelector('.toggle-ecart').addEventListener('change', function () {
-      const select = document.querySelector('.ecart-select');
-      const display = document.querySelector('.ecart-display');
-      select.style.display = this.checked ? 'inline-block' : 'none';
-      if (!this.checked) {
-        select.value = "";
-        display.style.display = 'none';
-        display.innerHTML = '';
-      }
-    });
-
-    document.querySelector('.ecart-select').addEventListener('change', function () {
-      const type = this.value;
-      const display = document.querySelector('.ecart-display');
-      if (!type) return;
-      const portions = prompt("Combien de portions ? 🍷");
-      const qty = parseInt(portions);
-      if (!isNaN(qty) && qty > 0) {
-        addXP(-qty * 30);
-        display.style.display = 'block';
-        display.innerHTML = `${qty} dose(s) de ${type} <button class="cancel-btn" onclick="cancelEcart(${qty})">Annuler</button>`;
-      }
-    });
-
-    function cancelEcart(qty) {
-      addXP(qty * 30);
-      const display = document.querySelector('.ecart-display');
-      display.style.display = 'none';
-      display.innerHTML = '';
-      document.querySelector('.ecart-select').value = "";
+    function showTab(id) {
+      document.querySelectorAll('.tab-content').forEach(tab => tab.classList.remove('active'));
+      document.getElementById(id).classList.add('active');
     }
+
+    document.querySelectorAll('input[type="checkbox"]').forEach(checkbox => {
+      checkbox.addEventListener('change', function () {
+        if (this.checked) {
+          const type = this.getAttribute('data-type');
+          if (type) {
+            if (limits[type] !== undefined) {
+              if (counters[type] < limits[type]) {
+                counters[type]++;
+                addXP(30);
+              }
+            } else {
+              addXP(30);
+            }
+          }
+        }
+      });
+    });
+
+    document.querySelectorAll('.ecart-select').forEach(select => {
+      select.addEventListener('change', function () {
+        const image = document.getElementById('griffon-image');
+        if (this.value === 'alcool') {
+          image.src = 'assets/images/pet-griffon-malade.png';
+          addXP(-30);
+        } else if (this.value === 'sucre' || this.value === 'sale') {
+          image.src = 'assets/images/pet-griffon-dodu.png';
+          addXP(-30);
+        } else {
+          image.src = 'assets/images/pet-bebe-griphon.png';
+        }
+      });
+    });
 
     updateXPBar();
   </script>
