@@ -243,7 +243,7 @@
       select.style.display = show ? 'block' : 'none';
     }
 
-    function changerGriffon(type) {
+ function changerGriffon(type) {
   const image = document.getElementById('griffon-image');
   switch(type) {
     case 'alcool':
@@ -261,31 +261,19 @@
         }
       }
       break;
+
     case 'feculents':
       image.src = 'assets/images/pet-griffon-dodu.png';
       break;
+
     case 'proteines':
       image.src = 'assets/images/pet-griffon-muscle.png';
       break;
+
     default:
       image.src = 'assets/images/pet-bebe-griphon.png';
   }
-} else {
-      const retry = confirm("Tu as entré une valeur invalide. Veux-tu réessayer ?");
-      if (!retry) validInput = true;
-    }
-  }
-  break;
-        case 'feculents':
-          image.src = 'assets/images/pet-griffon-dodu.png';
-          break;
-        case 'proteines':
-          image.src = 'assets/images/pet-griffon-muscle.png';
-          break;
-        default:
-          image.src = 'assets/images/pet-bebe-griphon.png';
-      }
-    }
+}
 
     document.querySelectorAll('input[type="checkbox"]').forEach(checkbox => {
       checkbox.addEventListener('change', function () {
